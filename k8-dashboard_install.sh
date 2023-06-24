@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# AS K8 metrics pod is required - below is a simple check for this:
+if kubectl get pods --all-namespaces | grep metrics-server; then
+    echo "K8s metrics-server is running."
+else
+    echo "Error: K8s metrics-server is not running."
+    exit 1
+fi
+
 # Create a namespace for the dashboard
 kubectl create namespace kubernetes-dashboard
 
