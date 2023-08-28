@@ -11,7 +11,7 @@ fi
 # Create a namespace for the dashboard
 kubectl create namespace kubernetes-dashboard
 
-mkdir /home/vagrant/K8-dashboard
+mkdir /home/vagrant/RafK8clstr/K8-dashboard
 
 # Deploy the dashboard using NodePort service
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
@@ -44,17 +44,17 @@ done
 
 
 # Create admin-user Service Account
-sudo tee /home/vagrant/K8-dashboard/k8-sa_admi-user.yaml <<EOF
+sudo tee /home/vagrant/RafK8clstr/K8-dashboard/k8-sa_admi-user.yaml <<EOF
 apiVersion: v1
 kind: ServiceAccount
 metadata:
     name: admin-user
     namespace: kubernetes-dashboard
 EOF
-kubectl apply -f /home/vagrant/K8-dashboard/k8-sa_admi-user.yaml
+kubectl apply -f /home/vagrant/RafK8clstr/K8-dashboard/k8-sa_admi-user.yaml
 
 # Create admin-user ClusterRole and ClusterRoleBinding
-sudo tee /home/vagrant/K8-dashboard/k8dash-cr-crb_admin-user.yaml <<EOF
+sudo tee /home/vagrant/RafK8clstr/K8-dashboard/k8dash-cr-crb_admin-user.yaml <<EOF
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -68,7 +68,7 @@ subjects:
   name: admin-user
   namespace: kubernetes-dashboard
 EOF
-kubectl apply -f /home/vagrant/K8-dashboard/k8dash-cr-crb_admin-user.yaml
+kubectl apply -f /home/vagrant/RafK8clstr/K8-dashboard/k8dash-cr-crb_admin-user.yaml
 
 #Create and display token to logon
 echo -e "!!!"
